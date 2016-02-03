@@ -1,0 +1,131 @@
+/*
+
+    Timeline - Responsive, jQuery-based timeline
+    Version 1.0.0
+    Ryan Fitzgerald
+    http://RyanFitzgerald.ca/
+    ---
+    Repo: http://github.com/ryanfitzgerald/timeline
+    Issues: http://github.com/ryanfitzgerald/timeline/issues
+    Licensed under MIT Open Source
+
+ */
+.timeline-wrap {
+  position: relative;
+  padding: 30px 0;
+  margin: 0 30px; }
+  .timeline-wrap:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 4px;
+    background: #b1c3cf; }
+
+.timeline-point {
+  position: relative;
+  clear: both;
+  content: "";
+  display: table;
+  width: 100%; }
+
+.timeline-content {
+  margin-bottom: 30px;
+  width: 45%;
+  min-height: 60px;
+  color: #000;
+  background-color: #BCC1C3; }
+  .timeline-content:after {
+    content: ' ';
+    left: 45%;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #BCC1C3;
+    position: absolute; }
+
+.timeline-right .timeline-content {
+  float: right; }
+  .timeline-right .timeline-content:after {
+    left: auto;
+    right: 45%;
+    top: 20px;
+    border-left: none;
+    border-right: 10px solid #BCC1C3;
+    position: absolute; }
+
+.timeline-user {
+  padding: 15px; }
+
+.timeline-icon {
+  position: absolute;
+  margin-left: -13px;
+  top: 15px;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e73c3c; }
+
+.timeline-wrap-right:before {
+  left: 0; }
+.timeline-wrap-right .timeline-content-right {
+  margin-left: 10%;
+  width: 90%; }
+  .timeline-wrap-right .timeline-content-right:after {
+    left: auto;
+    right: 90%;
+    border-left: none;
+    border-right: 10px solid #000; }
+.timeline-wrap-right .timeline-icon-right {
+  left: 0; }
+
+.timeline-wrap-left:before {
+  left: auto;
+  right: 0; }
+.timeline-wrap-left .timeline-content-left {
+  margin-left: 0;
+  margin-right: 10%;
+  width: 90%; }
+  .timeline-wrap-left .timeline-content-left:after {
+    right: auto;
+    left: 90%;
+    border-right: none;
+    border-left: 10px solid #000; }
+.timeline-wrap-left .timeline-icon-left {
+  left: auto;
+  right: 0;
+  margin-right: -13px; }
+
+@media only screen and (max-width: 768px) {
+  .timeline-wrap:not(.timeline-wrap-left) {
+    margin: 0 15px; }
+    .timeline-wrap:not(.timeline-wrap-left):before {
+      left: 0; }
+
+  .timeline-content {
+    margin-left: 10%;
+    width: 90%; }
+    .timeline-content:after {
+      left: auto;
+      right: 90%;
+      border-left: none;
+      border-right: 10px solid #000; }
+
+  .timeline-icon {
+    left: 0;
+    width: 25px;
+    height: 25px;
+    top: 17px;
+    margin-left: -11px; }
+
+  .timeline-right .timeline-content {
+    float: none; }
+    .timeline-right .timeline-content:after {
+      left: auto;
+      right: 90%; } }
+
+/*# sourceMappingURL=timeline.css.map */

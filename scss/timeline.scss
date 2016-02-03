@@ -1,0 +1,190 @@
+/*
+
+    Timeline - Responsive, jQuery-based timeline
+    Version 1.0.0
+    Ryan Fitzgerald
+    http://RyanFitzgerald.ca/
+    ---
+    Repo: http://github.com/ryanfitzgerald/timeline
+    Issues: http://github.com/ryanfitzgerald/timeline/issues
+    Licensed under MIT Open Source
+
+ */
+
+// Define Timeline Wrapping Class Styles
+.timeline-wrap {
+    position: relative;
+    padding: 30px 0;
+    margin: 0 30px;
+
+    &:before { // Timeline bar
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        width: 4px;
+        background: #b1c3cf;
+    }
+}
+
+// Define styles for each Timeline point
+.timeline-point {
+    position: relative;
+    clear: both;
+    content: "";
+    display: table;
+    width: 100%;
+}
+
+// Define styles for timeline content blocks
+.timeline-content {
+    margin-bottom: 30px;
+    width: 45%;
+    min-height: 60px;
+    color: #000;
+    background-color: #BCC1C3;
+
+    &:after { // Timeline block arrow
+        content: ' ';
+        left: 45%;
+        top: 20px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #BCC1C3;
+        position: absolute;
+    }
+}
+
+// Define styles for when timeline is on right
+.timeline-right {
+    .timeline-content {
+        float: right;
+
+        &:after {
+            left: auto;
+            right: 45%;
+            top: 20px;
+            border-left: none;
+            border-right: 10px solid #BCC1C3;
+            position: absolute;
+        }
+    }
+}
+
+// User content padding
+.timeline-user {
+    padding: 15px;
+}
+
+// Icons for each timeline point
+.timeline-icon {
+    position: absolute;
+    margin-left: -13px;
+    top: 15px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e73c3c;
+}
+
+// If non-alternating, start right is selected -> apply these styles
+.timeline-wrap-right {
+
+    &:before {
+        left: 0;
+    }
+
+    .timeline-content-right {
+        margin-left: 10%;
+        width: 90%;
+
+        &:after {
+            left: auto;
+            right: 90%;
+            border-left: none;
+            border-right: 10px solid #000;
+        }
+    }
+
+    .timeline-icon-right {
+        left: 0;
+    }
+
+}
+
+// If non-alternating, start left is selected -> apply these styles
+.timeline-wrap-left {
+
+    &:before {
+        left: auto;
+        right: 0;
+    }
+
+    .timeline-content-left {
+        margin-left: 0;
+        margin-right: 10%;
+        width: 90%;
+
+        &:after {
+            right: auto;
+            left: 90%;
+            border-right: none;
+            border-left: 10px solid #000;
+        }
+    }
+
+    .timeline-icon-left {
+        left: auto;
+        right: 0;
+        margin-right: -13px;
+    }
+
+}
+
+// Media Queries
+@media only screen and (max-width: 768px) {
+
+    .timeline-wrap:not(.timeline-wrap-left) {
+        margin: 0 15px;
+
+        &:before {
+            left: 0;
+        }
+    }
+
+    .timeline-content {
+        margin-left: 10%;
+        width: 90%;
+
+        &:after {
+            left: auto;
+            right: 90%;
+            border-left: none;
+            border-right: 10px solid #000;
+        }
+    }
+
+    .timeline-icon {
+        left: 0;
+        width: 25px;
+        height: 25px;
+        top: 17px;
+        margin-left: -11px;
+    }
+
+    .timeline-right {
+        .timeline-content {
+            float: none;
+
+            &:after {
+                left: auto;
+                right: 90%;
+            }
+        }
+    }
+
+}
