@@ -1,0 +1,156 @@
+// Main Styles
+
+$main-colour: #4EB780;
+
+#display {
+    background-color: $main-colour;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    text-align: center;
+    padding: 15em 1em;
+
+    h1 {
+        font-family: 'Pacifico', cursive;
+        font-weight: 100;
+        font-size: 4.5em;
+        margin: 0;
+        color: #fff;
+    }
+
+    h2 {
+        font-weight: 300;
+        font-size: 2em;
+        margin: 0 0 10px 0;
+        color: #fff;
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        border: 2px solid #fff;
+        padding: 10px 20px;
+        margin: 15px 10px 0 10px;
+
+        &:hover {
+            background-color: #fff;
+            color: $main-colour;
+        }
+    }
+}
+
+#content {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    padding: 30px 15px;
+    max-width: 750px;
+    margin: 0 auto;
+    color: #565B65;
+
+    h2 {
+        color: #45474C;
+        font-size: 2em;
+        margin: 15px 0 0 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #E2DFDF;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin: 10px 0;
+        color: #45474C;
+    }
+
+    p {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+
+    a {
+        text-decoration: none;
+        color: $main-colour;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid #BFC4CE;
+
+        th, td {
+            padding: 10px;
+            border-right: 1px solid #BFC4CE;
+        }
+
+        tr {
+            border-bottom: 1px solid #BFC4CE;
+
+            &:nth-child(2n) {
+                background-color: #EFEFEF;
+            }
+        }
+    }
+
+    .button {
+        display: inline-block;
+        margin: 15px 0;
+        color: #fff;
+        background-color: $main-colour;
+        padding: 10px 20px;
+
+        &:hover {
+            text-decoration: none;
+            background-color: darken( $main-colour, 10% );
+        }
+    }
+}
+
+#footer {
+    padding: 3em 0;
+    background-color: #252832;
+    text-align: center;
+
+    a {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        margin: 10px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Media Queries
+@media only screen and (max-width: 480px) {
+
+    #display {
+        padding: 2em 0;
+
+        h1 {
+            font-size: 3em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+    }
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 959px) {
+
+    #display {
+        padding: 6em 0;
+
+        h1 {
+            font-size: 3.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+    }
+
+}
