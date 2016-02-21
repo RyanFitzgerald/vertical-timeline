@@ -2,26 +2,25 @@
 <html>
 <head>
     <title>Demo page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="timeline.css">
 </head>
 <body>
-<div id="test-class">
-    <div>
-        <h1>Block 1</h1>
+<div id="test">
+    <div data-date="January 2016">
+        Test Block 1
     </div>
     <div>
-        <h1>Block 2</h1>
+        Test Block 2
     </div>
     <div>
-        <h1>Block 3</h1>
+        Test Block 3
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="timeline.js"></script>
 <script>
-$(document).ready( function() {
-    $('#test-class').timeline();
-});
+    $('#test').timeline();
 </script>
 </body>
 </html>

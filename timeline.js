@@ -13,12 +13,30 @@
 
  (function ( $ ) {
 
+
+    var checkViewport = function(elem) {
+        if (typeof jQuery === "function" && elem instanceof jQuery) {
+            elem = elem[0];
+        }
+
+        var rect = elem.getBoundingClientRect();
+
+        return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
     $.fn.timeline = function(options) {
 
         // Overide defaults, if any
         var settings = $.extend({
             startSide: 'left',
             alternate: true,
+            showDate: true,
+            animate: true
         }, options);
 
         // Allow chaining and process each DOM node
@@ -34,8 +52,8 @@
             // Create timeline divs
             $userContent.each(function() {
                 // Add wrapping divs to each user div
-                $(this).addClass('timeline-user')
-                        .wrap('<div class="timeline-point"><div class="timeline-content"></div></div>');
+                $(this).addClass('timeline-content')
+                       .wrap('<div class="timeline-point"><div class="timeline-block"></div></div>');
             });
 
             // Add timeline icon
@@ -46,13 +64,7 @@
             // --- Orientation Setup ---
             // Add appropriate classes for non-alternating
             if (!settings.alternate) {
-                var side = settings.startSide;
-                $wrapper.addClass('timeline-wrap-'+side);
-                $('.timeline-point').each(function() {
-                    $(this).addClass('timeline-'+side);
-                    $(this).children('.timeline-icon').addClass('timeline-icon-'+side);
-                    $(this).children('.timeline-content').addClass('timeline-content-'+side);
-                });
+                $wrapper.addClass('timeline-wrap-'+settings.startSide);
             }
 
             // --- Alternating Setup ---
@@ -65,6 +77,42 @@
                 $('.timeline-point:even').each(function() {
                     $(this).addClass('timeline-right');
                 });
+            }
+
+            // --- Show date Setup ---
+            // Add dates to the timeline if exists
+            if (settings.showDate) {
+                console.log('here');
+                $('.timeline-content').each(function() {
+                    var date = $(this).data('date');
+                    if ($(this).data('date')) { // Prepend if exists
+                        $(this).parent().prepend('<span class="timeline-date">'+date+'</span>');
+                    }
+                });
+            }
+
+            // --- Animation Setup ---
+            // Fade the blocks in as they come into viewport
+            if (settings.animate) {
+                // Hide them initially
+                $('.timeline-block').hide();
+
+                // Initial check if in viewport
+                $('.timeline-block').each(function() {
+                    if (checkViewport($(this))) {
+                        $(this).fadeTo(300,1);
+                    }
+                });
+
+                // Check again on scroll
+                $(window).scroll(function() {
+                    $('.timeline-block').each(function() {
+                        if (checkViewport($(this))) {
+                            $(this).fadeTo(300,1);
+                        }
+                    });
+                });
+
             }
 
         });
