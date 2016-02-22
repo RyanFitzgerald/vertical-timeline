@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Timeline - A responsive, jQuery-based timeline generator</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/timeline.min.css" />
+</head>
+<body>
+<h1 style="text-align: center;">Timeline Examples</h1>
+<a href="index.html" style="display: block; text-align: center;">&larr; Back to docs</a>
+<h2 style="text-align: center;">Default Example</h2>
+<div id="myTimeline">
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+</div>
+<h2 style="text-align: center;">No Alternate Example</h2>
+<div id="myTimeline2">
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+    <div data-date="Date Here">
+        <h2>Lorem Ipsum</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies orci eros, eu interdum elit tristique vel. Curabitur posuere, ligula ac aliquam laoreet, tellus risus eleifend urna, in ultrices nunc tellus eu justo. Etiam vestibulum, neque non dignissim aliquam, eros arcu gravida mi, eget rutrum sapien ipsum non arcu.
+        </p>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="js/timeline.min.js"></script>
+<script>
+    $('#myTimeline').timeline();
+    $('#myTimeline2').timeline({
+        startSide: 'right',
+        alternate: false
+    });
+</script>
+</body>
+</html>
