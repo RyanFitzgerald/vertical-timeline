@@ -82,7 +82,6 @@
             // --- Show date Setup ---
             // Add dates to the timeline if exists
             if (settings.showDate) {
-                console.log('here');
                 $('.timeline-content').each(function() {
                     var date = $(this).data('date');
                     if ($(this).data('date')) { // Prepend if exists
@@ -95,7 +94,7 @@
             // Fade the blocks in as they come into viewport
             if (settings.animate) {
                 // Hide them initially
-                $('.timeline-block').hide();
+                $('.timeline-block').fadeTo(0, 0);
 
                 // Initial check if in viewport
                 $('.timeline-block').each(function() {
