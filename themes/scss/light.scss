@@ -1,0 +1,24 @@
+// Timeline - Light Theme
+
+.timeline-wrap {
+
+    &:before {
+        background: #c5c5c5;
+    }
+
+    .timeline-icon {
+        background: #e64c4c;
+    }
+
+    .timeline-block {
+        color: #545050;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .timeline-date {
+        font-weight: bold;
+    }
+
+}
