@@ -57,7 +57,7 @@
             });
 
             // Add timeline icon
-            $('.timeline-point').each(function() {
+            $wrapper.find('.timeline-point').each(function() {
                 $(this).prepend('<div class="timeline-icon"></div>');
             });
 
@@ -70,11 +70,11 @@
             // --- Alternating Setup ---
             // Add alternating class if set to true
             if (settings.alternate && settings.startSide == 'left') {
-                $('.timeline-point:odd').each(function() {
+                $wrapper.find('.timeline-point:odd').each(function() {
                     $(this).addClass('timeline-right');
                 });
             } else if (settings.alternate && settings.startSide == 'right') {
-                $('.timeline-point:even').each(function() {
+                $wrapper.find('.timeline-point:even').each(function() {
                     $(this).addClass('timeline-right');
                 });
             }
@@ -82,7 +82,7 @@
             // --- Show date Setup ---
             // Add dates to the timeline if exists
             if (settings.showDate) {
-                $('.timeline-content').each(function() {
+                $wrapper.find('.timeline-content').each(function() {
                     var date = $(this).data('date');
                     if ($(this).data('date')) { // Prepend if exists
                         $(this).parent().prepend('<span class="timeline-date">'+date+'</span>');
@@ -94,10 +94,10 @@
             // Fade the blocks in as they come into viewport
             if (settings.animate) {
                 // Hide them initially
-                $('.timeline-block').fadeTo(0, 0);
+                $wrapper.find('.timeline-block').fadeTo(0, 0);
 
                 // Initial check if in viewport
-                $('.timeline-block').each(function() {
+                $wrapper.find('.timeline-block').each(function() {
                     if (checkViewport($(this))) {
                         $(this).fadeTo(300,1);
                     }
@@ -105,7 +105,7 @@
 
                 // Check again on scroll
                 $(window).scroll(function() {
-                    $('.timeline-block').each(function() {
+                    $wrapper.find('.timeline-block').each(function() {
                         if (checkViewport($(this))) {
                             $(this).fadeTo(300,1);
                         }
