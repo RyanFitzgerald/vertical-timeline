@@ -1,0 +1,225 @@
+/*
+
+    Timeline - Responsive, jQuery-based timeline
+    Version 1.0.0
+    Ryan Fitzgerald
+    http://RyanFitzgerald.ca/
+    ---
+    Repo: http://github.com/ryanfitzgerald/timeline
+    Issues: http://github.com/ryanfitzgerald/timeline/issues
+    Licensed under MIT Open Source
+
+ */
+.vtimeline {
+  position: relative;
+  padding: 30px; }
+  .vtimeline:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    background: #8e8e8e;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto; }
+
+.vtimeline-point {
+  position: relative;
+  clear: both;
+  content: '';
+  display: table;
+  width: 100%;
+  margin-bottom: 30px; }
+  .vtimeline-point:last-child {
+    margin-bottom: 0; }
+
+.vtimeline-icon {
+  position: absolute;
+  background: #000;
+  border: 3px solid #fff;
+  height: 30px;
+  width: 30px;
+  top: 5px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%; }
+
+.vtimeline-block {
+  min-height: 50px;
+  width: 45%;
+  background: #efefef;
+  opacity: 100;
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all; }
+  .vtimeline-block:after {
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: 45%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #efefef;
+    border-right: none; }
+
+.vtimeline-block.vt-fade {
+  opacity: 0; }
+
+.vtimeline-right .vtimeline-block {
+  float: right; }
+  .vtimeline-right .vtimeline-block:after {
+    left: auto;
+    right: 45%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: none;
+    border-right: 10px solid #efefef; }
+
+.vtimeline-date {
+  position: absolute;
+  top: 15px;
+  left: 55%; }
+
+.vtimeline-right .vtimeline-date {
+  left: auto;
+  right: 55%; }
+
+.vtimeline-content {
+  padding: 15px; }
+
+.vtimeline-align-left:before {
+  right: 30px;
+  left: auto;
+  margin-left: 0;
+  margin-right: 0; }
+
+.vtimeline-align-left .vtimeline-icon {
+  top: 5px;
+  right: 0;
+  left: auto;
+  margin-right: -15px;
+  margin-left: 0; }
+
+.vtimeline-align-left .vtimeline-date {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  padding: 15px 0 0 15px; }
+
+.vtimeline-align-left .vtimeline-block {
+  min-height: 50px;
+  margin-right: 10%;
+  width: 90%;
+  background: #efefef; }
+  .vtimeline-align-left .vtimeline-block:after {
+    top: 13px;
+    left: auto;
+    right: 10%;
+    margin-right: -10px;
+    border-left: 10px solid #efefef;
+    border-right: none; }
+
+.vtimeline-align-right:before {
+  left: 30px;
+  right: auto;
+  margin-left: 0;
+  margin-right: 0; }
+
+.vtimeline-align-right .vtimeline-icon {
+  top: 5px;
+  left: 0;
+  right: auto;
+  margin-left: -15px;
+  margin-right: 0; }
+
+.vtimeline-align-right .vtimeline-date {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  padding: 15px 0 0 15px; }
+
+.vtimeline-align-right .vtimeline-block {
+  min-height: 50px;
+  margin-left: 10%;
+  width: 90%;
+  background: #efefef; }
+  .vtimeline-align-right .vtimeline-block:after {
+    top: 13px;
+    left: 10%;
+    margin-left: -10px;
+    border-right: 10px solid #efefef;
+    border-left: none; }
+
+@media only screen and (max-width: 850px) {
+  .vtimeline:before {
+    left: 30px;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0; }
+  .vtimeline .vtimeline-icon {
+    top: 7px;
+    height: 25px;
+    width: 25px;
+    left: -13px;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0; }
+  .vtimeline .vtimeline-block {
+    width: 85%;
+    margin-left: 15%; }
+    .vtimeline .vtimeline-block:after {
+      margin-left: -10px;
+      left: 15%;
+      border-right: 10px solid #efefef;
+      border-left: none; }
+  .vtimeline .vtimeline-right .vtimeline-block {
+    float: none; }
+    .vtimeline .vtimeline-right .vtimeline-block:after {
+      left: 15%;
+      right: auto;
+      border-left: none;
+      border-right: 10px solid #efefef; }
+  .vtimeline .vtimeline-date {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    padding: 15px 0 0 15px; }
+  .vtimeline .vtimeline-right .vtimeline-date {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    padding: 15px 0 0 15px; }
+  .vtimeline-align-left:before {
+    right: 30px;
+    left: auto;
+    margin-left: 0;
+    margin-right: 0; }
+  .vtimeline-align-left .vtimeline-icon {
+    top: 7px;
+    height: 25px;
+    width: 25px;
+    right: -13px;
+    left: auto;
+    margin-left: 0;
+    margin-right: 0; }
+  .vtimeline-align-left .vtimeline-block {
+    width: 85%;
+    margin-left: 0;
+    margin-right: 15%; }
+    .vtimeline-align-left .vtimeline-block:after {
+      margin-left: 0;
+      margin-right: -10px;
+      left: auto;
+      right: 15%;
+      border-left: 10px solid #efefef;
+      border-right: none; } }

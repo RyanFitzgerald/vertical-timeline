@@ -1,0 +1,36 @@
+{
+  "name": "vertical-timeline",
+  "version": "1.0.0",
+  "description": "Responsive, jQuery-based vertical timeline generator",
+  "main": "src/vertical-timeline.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanFitzgerald/timeline.git"
+  },
+  "keywords": [
+    "timeline",
+    "vertical",
+    "vertical-timeline",
+    "jquery",
+    "javascript",
+    "generator",
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Ryan Fitzgerald",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyanFitzgerald/vertical-timeline/issues"
+  },
+  "homepage": "https://github.com/RyanFitzgerald/vertical-timeline#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0"
+  }
+}
