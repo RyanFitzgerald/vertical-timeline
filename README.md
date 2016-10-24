@@ -41,8 +41,7 @@ Another example usage of timeline using it's available options is as follows:
 $('#myID').timeline({
     startSide: 'left',
     alternate: true,
-    showDate: true,
-    animate: true
+    animate: "fade"
 });
 ```
 
