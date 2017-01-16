@@ -61,7 +61,7 @@ Dates can easily be added by utilizing data attributes. In order to have dates s
         My Content 3
     </div>
 </div>
-...
+```
 
 Every time that data attribute is used, that date will be displayed.
 
