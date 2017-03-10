@@ -20,7 +20,7 @@ Bottom of page:
 
 Finally, initialize it:
 ```javascript
-$('#someIDorClass').timeline();
+$('#someIDorClass').verticalTimeline();
 ```
 
 ## How to Use
@@ -38,7 +38,7 @@ animate | Choose whether or not points fade in as they appear in viewport (optio
 Another example usage of timeline using it's available options is as follows:
 
 ```javascript
-$('#myID').timeline({
+$('#myID').verticalTimeline({
     startSide: 'left',
     alternate: true,
     animate: "fade"
