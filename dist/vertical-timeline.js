@@ -96,19 +96,19 @@
 
                 // Initial check if in viewport
                 $this.find('.vtimeline-block.vt-'+animateType).each(function() {
-                    if (checkViewport($this[0])) {
+                    if (checkViewport($(this)[0])) {
                         $(this).removeClass("vt-"+animateType);
                     }
                 });
 
                 // Check elements on scroll
-                // $(window).on("scroll", function() {
-                //     $this.find('.vtimeline-block.vt-'+animateType).each(function() {
-                //         if (checkViewport($this[0])) {
-                //             $(this).removeClass("vt-"+animateType);
-                //         }
-                //     });
-                // });
+                $(window).on("scroll", function() {
+                    $this.find('.vtimeline-block.vt-'+animateType).each(function() {
+                        if (checkViewport($(this)[0])) {
+                            $(this).removeClass("vt-"+animateType);
+                        }
+                    });
+                });
 
 
             }
