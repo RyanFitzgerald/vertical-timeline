@@ -1,120 +1,121 @@
-/*
+'use strict';
 
-    VErtical Timeline - Responsive, jQuery-based vertical timeline generator
-    Version 2.0.0
-    Ryan Fitzgerald
-    http://RyanFitzgerald.ca/
-    ---
-    Repo: http://github.com/ryanfitzgerald/vertical-timeline
-    Issues: http://github.com/ryanfitzgerald/vertical-timeline/issues
-    Licensed under MIT Open Source
+/*!
+    Title: Vertical-Timeline
+    Version: 2.0.0
+    Last Change: 04/30/17
+    Author: Ryan Fitzgerald
+    Repo: https://github.com/RyanFitzgerald/vertical-timeline
+    Issues: https://github.com/RyanFitzgerald/vertical-timeline/issues
+	LICENSE: MIT
+*/
 
- */
+(function ($) {
 
-(function ( $ ) {
+    // Check viewport
+    var inViewport = function inViewport(ele) {
+        // Get viewport distances
+        var viewport = {
+            top: $(window).scrollTop(),
+            left: $(window).scrollLeft(),
+            right: $(window).scrollLeft() + $(window).width(),
+            bottom: $(window).scrollTop() + $(window).height()
+        };
 
-    // Check if element is in viewport
-    var checkViewport = function(elem) {
+        // Get element bounds
+        var bounds = ele.offset();
+        bounds.right = bounds.left + ele.outerWidth();
+        bounds.bottom = bounds.top + ele.outerHeight();
 
-        var rect = elem.getBoundingClientRect();
+        // Compare and return
+        return !(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom);
+    };
 
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    $.fn.verticalTimeline = function(options) {
+    $.fn.verticalTimeline = function (options) {
 
         // Overide defaults, if any
         var settings = $.extend({
-            startSide: 'left',
+            startLeft: true,
             alternate: true,
-            animate: null,
-            theme: null
+            animate: false,
+            arrows: true
         }, options);
 
         // Allow chaining and process each DOM node
-        return this.each(function() {
-
-            // Define variables
-            $this = $(this); // Store reference to this
-            $userContent = $this.children('div'); // user content
+        return this.each(function () {
+            // Store user content
+            var $userContent = $(this).children('div');
 
             // Add main class
-            $this.addClass('vtimeline');
+            $(this).addClass('vtimeline');
 
-            // Create timeline divs
-            $userContent.each(function() {
-                // Add wrapping divs to each user div
-                $(this).addClass('vtimeline-content')
-                       .wrap('<div class="vtimeline-point"><div class="vtimeline-block"></div></div>');
+            // Create required content divs
+            $userContent.each(function () {
+                $(this).addClass('vtimeline-content').wrap('<div class="vtimeline-point"><div class="vtimeline-block"></div></div>');
             });
 
             // Add timeline icons
-            $this.find('.vtimeline-point').each(function() {
+            $(this).find('.vtimeline-point').each(function () {
                 $(this).prepend('<div class="vtimeline-icon"></div>');
+                // If there is a provided icon, add it
+                if ($(this).find('[data-vticon=true]').length) {
+                    var $icon = $(this).find('[data-vticon=true]').html();
+                    $(this).find('.vtimeline-icon').append($icon);
+                    $(this).find('[data-vticon=true]').remove();
+                }
             });
 
-            // --- Orientation Setup ---
-            // Add appropriate classes for non-alternating
+            // Setup orientation and alternation
             if (!settings.alternate) {
-                $this.addClass('vtimeline-align-'+settings.startSide);
+                $(this).find('.vtimeline-block').addClass('vtimeline-' + settings.startSide);
+            } else {
+                if (settings.startLeft) {
+                    $(this).find('.vtimeline-point:odd').each(function () {
+                        $(this).find('.vtimeline-block').addClass('vtimeline-right');
+                    });
+                } else {
+                    $(this).find('.vtimeline-point:even').each(function () {
+                        $(this).find('.vtimeline-block').addClass('vtimeline-right');
+                    });
+                }
             }
 
-            // --- Alternating Setup ---
-            // Add alternating class if set to true
-            if (settings.alternate && settings.startSide == 'left') {
-                $this.find('.vtimeline-point:odd').each(function() {
-                    $(this).addClass('vtimeline-right');
-                });
-            } else if (settings.alternate && settings.startSide == 'right') {
-                $this.find('.vtimeline-point:even').each(function() {
-                    $(this).addClass('vtimeline-right');
+            // Add animation style if provided
+            if (settings.animate) {
+                $(this).find('.vtimeline-block').each(function () {
+                    var _this = this;
+
+                    $(this).addClass('vt-animate-' + settings.animate);
+                    if (inViewport($(this))) {
+                        $(this).removeClass('vt-animate-' + settings.animate);
+                    }
+                    $(window).on('scroll', function () {
+                        if (inViewport($(_this))) {
+                            $(_this).removeClass('vt-animate-' + settings.animate);
+                        }
+                    });
                 });
             }
 
             // Add dates to the timeline if exists
-            $this.find('.vtimeline-content').each(function() {
+            $(this).find('.vtimeline-content').each(function () {
                 var date = $(this).data('vtdate');
-                if ($(this).data('vtdate')) { // Prepend if exists
-                    $(this).parent().prepend('<span class="vtimeline-date">'+date+'</span>');
+                var side = $(this).data('vtside');
+                // Add date if provided
+                if (date) {
+                    $(this).parent().prepend('<span class="vtimeline-date">' + date + '</span>');
+                }
+
+                // Add side override if given
+                if (side) {
+                    $(this).parent().addClass('vt-animate-' + side);
                 }
             });
 
-            // --- Animation Setup ---
-            // Fade the blocks in as they come into viewport
-            if (settings.animate == "fade") {
-
-                // Store animation type
-                var animateType = settings.animate;
-
-                // Apply animate style to blocks
-                $this.find('.vtimeline-block').addClass("vt-"+animateType);
-
-                // Initial check if in viewport
-                $this.find('.vtimeline-block.vt-'+animateType).each(function() {
-                    if (checkViewport($(this)[0])) {
-                        $(this).removeClass("vt-"+animateType);
-                    }
-                });
-
-                // Check elements on scroll
-                $(window).on("scroll", function() {
-                    $this.find('.vtimeline-block.vt-'+animateType).each(function() {
-                        if (checkViewport($(this)[0])) {
-                            $(this).removeClass("vt-"+animateType);
-                        }
-                    });
-                });
-
-
+            // Remove arrows if set
+            if (!settings.arrows) {
+                $(this).find('.vtimeline-block').addClass('vt-noarrows');
             }
-
         });
-
     };
-
-}( jQuery ));
+})(jQuery);

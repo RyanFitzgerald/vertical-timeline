@@ -2,7 +2,7 @@
 
 Vertical Timeline is a responsive, jQuery-based generator that builds a timeline based on user input. It comes with a number of customization options out of the box such as displaying dates, alternating toggle, animation, and choosing which side it starts on. It comes with little to no styling other than what it required, so it can be styled to suite your specific needs. I originally created a timeline for my personal website, however I have since found a number of possible reuse options for it, so I decided to create this simple plugin.
 
-The website for this plugin can be found [here](http://ryanfitzgerald.github.io/vertical-timeline/), which includes docs and a demo.
+The website for this plugin can be found [here](http://ryanfitzgerald.github.io/vertical-timeline/), which has the demo.
 
 ## Installation & Setup
 
@@ -29,9 +29,10 @@ Timeline has a few options that can be customized to suite your specific needs. 
 
 Name | Description | Default
 ---- | ----------- | -------
-startSide | Choose which side the first timelint point starts on | left
+startLeft | Choose whether or not it starts on the left (false = right side) | true
 alternate | Choose whether or not the points alternate sides | true
-animate | Choose whether or not points fade in as they appear in viewport (options: "fade") | null
+animate | Choose whether or not points fade in as they appear in viewport (options: "fade", "slide") | false
+arrows | Choose whether or not the content arrows show | true
 
 ## Example Usage
 
@@ -39,9 +40,10 @@ Another example usage of timeline using it's available options is as follows:
 
 ```javascript
 $('#myID').verticalTimeline({
-    startSide: 'left',
+    startLeft: false,
     alternate: true,
-    animate: "fade"
+    animate: "fade",
+    arrows: false
 });
 ```
 
@@ -65,11 +67,58 @@ Dates can easily be added by utilizing data attributes. In order to have dates s
 
 Every time that data attribute is used, that date will be displayed.
 
+## Override Side
+
+If you want, you can override the side that the content block shows up on by default. By adding the override, it will ignore whatever alternation or start side the other elements use. This can be done as follows:
+
+```html
+<div id="myTimeline">
+    <div data-vtside="left">
+        My Content 1
+    </div>
+    <div>
+        My Content 2
+    </div>
+    <div>
+        My Content 3
+    </div>
+</div>
+```
+
 ## Modifying Styles
 
-The styles can be modified fairly easily in the SASS file. All default colurs are set as variables at the top of the file.
+All elements use classes so their styles can be easily overwritten. You can add styles for any of the following elements:
 
-## Contributions
+Name | Description | Class Used
+---- | ----------- | -------
+Timelime Wrapper | This wraps the entire timeline | .vtimeline
+Timeline Point | This wraps the entirety of each point on the timeline | .vtimeline-point
+Timeline Icon | This is the icon associated with each point | .vtimeline-icon
+Timeline Block | This holds the date and content for each point | .vtimeline-block
+Timeline Date | This holds the date, if provided | .vtimeline-date
+Timeline Content | This holds the actual content of each point | .vtimeline-content
+
+## Adding Icons
+
+You can optionally add an icon inside of the circle corresponding to each timeline point. To do this, create a div inside of your content and give it the data attribute `data-vticon="true"`. Anything inside this div will get placed inside `.vtimeline-icon` of the corresponding element. You can use this to easily associate SVG icons, font-awesome icons, etc. with every point or only certain points. An example usage is as follows:
+
+```html
+<div id="myTimeline">
+    <div>
+        <div data-vticon="true">
+            <img src="some/icon/here.png">
+        </div>
+    </div>
+    <div>
+        My Content 2
+    </div>
+    <div>
+        My Content 3
+    </div>
+</div>
+```
+
+## Special Mention
 
 #### [CodyHouse.co](https://codyhouse.co/)
 

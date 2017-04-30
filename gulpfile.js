@@ -1,29 +1,44 @@
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var sass = require('gulp-sass');
-var rename = require('gulp-rename');
-var autoprefix = require('gulp-autoprefixer');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const uglify = require('gulp-uglify');
+const sass = require('gulp-sass');
+const rename = require('gulp-rename');
+const babel = require('gulp-babel');
+const autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('compress', function() {
+gulp.task('scripts', () => {
     return gulp.src('src/vertical-timeline.js')
-        .pipe(uglify())
+        .pipe(plumber(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        })))
+		.pipe(babel({
+			presets: ['es2015']
+		}))
+		.pipe(gulp.dest('dist'))
+        .pipe(uglify({
+            preserveComments: 'license'
+        }))
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy', function() {
-    return gulp.src('src/vertical-timeline.js')
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('sass', function() {
+gulp.task('styles', () => {
     return gulp.src('src/vertical-timeline.scss')
+        .pipe(plumber(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        })))
         .pipe(sass())
-        .pipe(autoprefix())
+        .pipe(autoprefixer())
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['compress', 'copy', 'sass'], function() {
-    gulp.watch('src/*.js', ['compress', 'copy']);
-    gulp.watch('src/*.scss', ['sass']);
+gulp.task('watch', ['scripts', 'styles'], function() {
+    gulp.watch('src/*.js', ['scripts']);
+    gulp.watch('src/*.scss', ['styles']);
 });
