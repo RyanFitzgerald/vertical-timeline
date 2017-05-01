@@ -1,131 +1,128 @@
-# Gridious
+# Vertical Timeline
 
-Gridious is a simplistic CSS grid framework that is fully responsive and customizable. You can easily add to or edit the existing code to fit your individual project needs. It was created as a simple, bloat-free alternative to Bootstrap, Foundation, and the various other frameworks out there and was modelled off of the grid features I found to be most effective while working with them. In addition, I wanted to create a grid system that I could easily adapt to each project I work on.
+Vertical Timeline is a responsive, jQuery-based generator that builds a timeline based on user input. It comes with a number of customization options out of the box such as displaying dates, alternating toggle, animation, and choosing which side it starts on. It comes with little to no styling other than what it required, so it can be styled to suite your specific needs. I originally created a timeline for my personal website, however I have since found a number of possible reuse options for it, so I decided to create this simple plugin.
+
+The website for this plugin can be found [here](http://ryanfitzgerald.github.io/vertical-timeline/), which has the demo.
 
 ## Installation & Setup
 
-All the installation that is required is simply including the compiled CSS file in your document:
+All the installation that is required is simply including the compiled CSS and JS file in your document (minified or not) and then initializing it.
 
+Top of page:
 ```html
-<link rel="stylesheet" type="text/css" href="path/to/gridious.css">
+<link rel="stylesheet" type="text/css" href="path/to/vertical-timeline.css">
 ```
 
-Gridious will now be available on every page it is included on.
- 
-## Configuration
-
-There are a number of configuration options you can adjust if you like (or just leave the defaults). They can be found in ```_config.scss```
-
- Property | Variable Name | Description | Default
- -------- | ------------- | ----------- | -------
- Small Breakpoint | $sm-break | The upper limit of the small screen size | 480px
- Medium Breakpoint | $md-break | The upper limit of the medium screen size | 959px
- Max Width | $max-width | The max width the grid will expand for | 1200px
- Column Number | $column-number | The number of columns per row | 12
- Gutter | $column-padding | The space on either side of each column | 15px
-
-## The Grid
-
-The grid is easy to use and has 3 main screen sizes (unless otherwise edited). They are:
-
-```css
-@media only screen and (max-width: 480px) {
-	// Small Screen
-	// Syntax: sm-col-X where X is an integer between 1 and $column-number
-}
-
-@media only screen and (max-width: 481px) and (max-width: 959px) {
-	// Medium Screen
-	// Syntax: md-col-X where X is an integer between 1 and $column-number
-}
-
-@media only screen and (min-width: 960px) {
-	// Large Screen
-	// Syntax: lg-col-X where X is an integer between 1 and $column-number
-}
+Bottom of page:
+```html
+<script src="path/to/vertical-timeline.min.js"></script>
 ```
 
-Gridious is mobile-first and you may have different columns for each screen size. If the total number of columns in a row exceeds the max number of columns set (Default: 12), it will wrap below.
+Finally, initialize it:
+```javascript
+$('#someIDorClass').verticalTimeline();
+```
+
+## How to Use
+
+Timeline has a few options that can be customized to suite your specific needs. The included options that can be utilized are:
+
+Name | Description | Default
+---- | ----------- | -------
+startLeft | Choose whether or not it starts on the left (false = right side) | true
+alternate | Choose whether or not the points alternate sides | true
+animate | Choose whether or not points fade in as they appear in viewport (options: "fade", "slide") | false
+arrows | Choose whether or not the content arrows show | true
+
+## Example Usage
+
+Another example usage of timeline using it's available options is as follows:
+
+```javascript
+$('#myID').verticalTimeline({
+    startLeft: false,
+    alternate: true,
+    animate: "fade",
+    arrows: false
+});
+```
+
+## Adding Dates
+
+Dates can easily be added by utilizing data attributes. In order to have dates show up, the following data attribute is used:
 
 ```html
-<div class="row">
-	<div class="sm-col-12 md-col-10 lg-col-6">
-		12 columns wide on small (wrap) 
-		10 columns wide on medium
-		6 columns wide on large
-	</div>
-	<div class="sm-col-12 md-col-2 lg-col-6">
-		12 columns wide on small (wrap)
-		2 columns wide on medium
-		6 columns wide on large
-	</div>
+<div id="myTimeline">
+    <div data-vtdate="February 2016">
+        My Content 1
+    </div>
+    <div data-vtdate="March 2016">
+        My Content 2
+    </div>
+    <div data-vtdate="April 2016">
+        My Content 3
+    </div>
 </div>
 ```
 
-## Utility Classes
+Every time that data attribute is used, that date will be displayed.
 
-There are a couple of utility classes that can be used in conjunction with the grid by adding the classes to elements.
+## Override Side
 
- Name | Description | Usage
- ---- | ----------- | -----
- Full Width | Allows the row to span the entire width, ignoring the max width set in config | .gd-full
- Clearfix | Clearfix hack; fixes floating issues that sometimes occurs | .clearfix
- Hide All Screens | Hides an element on any screen size | .gd-hide
- Hide on Small Only | Hides an element when on small screen | .gd-hide-sm
- Hide on Medium Only | Hides an element when on medium screen | .gd-hide-md
- Hide on Medium & Down | Hides an element when on medium screen or below | .gd-hide-md-down
- Hide on Medium & Up | Hides an element when on medium screen or above | .gd-hide-md-up
- Hide on Large Only | Hides an element when on large screen | .gd-hide-lg
- 
- Add additional utility classes of your own in ```_utilities.scss``` if you wish.
+If you want, you can override the side that the content block shows up on by default. By adding the override, it will ignore whatever alternation or start side the other elements use. This can be done as follows:
 
-## Customization
+```html
+<div id="myTimeline">
+    <div data-vtside="left">
+        My Content 1
+    </div>
+    <div>
+        My Content 2
+    </div>
+    <div>
+        My Content 3
+    </div>
+</div>
+```
 
-Gridious is simple to use and edit. It is a barebones CSS framework and, as a result, you can easily customize to fit whatever project you happen to be working on. The files included and their usages are as follows:
- 
- File Name | Usage 
- --------- | -----
- _config.scss | Holds all configuration variables
- _grid.scss | Where the grid functionality is stored
- _mixins.scss | Holds mixins used in other files
- _utilities.scss | Holds all utility classes
- _variables.scss | Holds and defines all variables used in other files
- 
- If you wish to add another screen size, you can take advantage of the generate-columns mixin:
- 
- ```scss
-	/ --- Generate Columns ---
-	// $size is the column name/size (ex: sm, md, lg)
-	@mixin generate-column($size) {
-		@for $sizeName from 1 through $columns {
-			.#{$size}-col-#{$sizeName} {
-				width: (100%/($columns/$sizeName));
-			}
-		}
-	}
- ```
- 
- In addition to the mixin, you can also create an type of column you wish as long as the collective widths add to 100%. For example,
- 
- ```html
- .col-10 {
-	width: 10%;
- }
- 
- .col-90 {
-	width: 90%;
- }
- 
- <div class="row">
-	<div class="col-10"></div>
-	<div class="col-90"></div>
- </div>
- ```
- 
-## Contributions
+## Modifying Styles
 
-#### Nicolas Gallagher & Jonathan Neal
-[Normalize.css](https://github.com/necolas/normalize.css/) : makes browsers render all elements more consistently and in line with modern standards. It precisely targets only the styles that need normalizing.
+All elements use classes so their styles can be easily overwritten. You can add styles for any of the following elements:
+
+Name | Description | Class Used
+---- | ----------- | -------
+Timelime Wrapper | This wraps the entire timeline | .vtimeline
+Timeline Point | This wraps the entirety of each point on the timeline | .vtimeline-point
+Timeline Icon | This is the icon associated with each point | .vtimeline-icon
+Timeline Block | This holds the date and content for each point | .vtimeline-block
+Timeline Date | This holds the date, if provided | .vtimeline-date
+Timeline Content | This holds the actual content of each point | .vtimeline-content
+
+## Adding Icons
+
+You can optionally add an icon inside of the circle corresponding to each timeline point. To do this, create a div inside of your content and give it the data attribute `data-vticon="true"`. Anything inside this div will get placed inside `.vtimeline-icon` of the corresponding element. You can use this to easily associate SVG icons, font-awesome icons, etc. with every point or only certain points. An example usage is as follows:
+
+```html
+<div id="myTimeline">
+    <div>
+        <div data-vticon="true">
+            <img src="some/icon/here.png">
+        </div>
+    </div>
+    <div>
+        My Content 2
+    </div>
+    <div>
+        My Content 3
+    </div>
+</div>
+```
+
+## Special Mention
+
+#### [CodyHouse.co](https://codyhouse.co/)
+
+Provided initial idea for the layout of the timeline from a published tutorial
 
 ## License
 

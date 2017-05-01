@@ -35,7 +35,7 @@
     </p>
     <pre>
         <code class="language-markup">
-            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;path/to/timeline.css&quot;&gt;
+            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;path/to/vertical-timeline.css&quot;&gt;
         </code>
     </pre>
     <p>
@@ -43,7 +43,7 @@
     </p>
     <pre>
         <code class="language-markup">
-            &lt;script src=&quot;path/to/timeline.js&quot;&gt;&lt;/script&gt;
+            &lt;script src=&quot;path/to/vertical-timeline.js&quot;&gt;&lt;/script&gt;
         </code>
     </pre>
     <p>
@@ -51,7 +51,7 @@
     </p>
     <pre>
         <code class="language-javascript">
-            $('#someIDorClass').timeline();
+            $('#someIDorClass').verticalTimeline();
         </code>
     </pre>
     <h2>Usage</h2>
@@ -68,9 +68,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>startSide</td>
-                <td>Choose which side the first timelint point starts on</td>
-                <td>left</td>
+                <td>startLeft</td>
+                <td>Choose whether or not it starts on the left (false = right side)</td>
+                <td>true</td>
             </tr>
             <tr>
                 <td>alternate</td>
@@ -78,13 +78,13 @@
                 <td>true</td>
             </tr>
             <tr>
-                <td>showDate</td>
-                <td>Choose whether or not dates are shown if provided</td>
-                <td>true</td>
+                <td>animate</td>
+                <td>Choose whether or not points fade in as they appear in viewport (options: "fade", "slide")</td>
+                <td>false</td>
             </tr>
             <tr>
-                <td>animate</td>
-                <td>Choose whether or not points fade in as they appear in viewport</td>
+                <td>arrows</td>
+                <td>Choose whether or not the content arrows show</td>
                 <td>true</td>
             </tr>
         </tbody>
@@ -95,44 +95,100 @@
     </p>
     <pre>
         <code class="language-javascript">
-            $('#myID').timeline({
-                startSide: 'left',
+            $('#myID').verticalTimeline({
+                startLeft: false,
                 alternate: true,
-                showDate: true,
-                animate: true
+                animate: "fade",
+                arrows: false
             });
         </code>
     </pre>
     <h2>Adding Dates</h2>
     <p>
-        Dates can easily be added by ensuring <b>setDate</b> is true (by default it is). In order to have dates show up, the following data attribute is used:
+        Dates can easily be added by utilizing data attributes. In order to have dates show up, the following data attribute is used:
     </p>
     <pre>
         <code class="language-markup">
             &lt;div id=&quot;myTimeline&quot;&gt;
-                &lt;div data-date=&quot;February 2016&quot;&gt;
+                &lt;div data-vtdate=&quot;February 2016&quot;&gt;
                     My Content 1
                 &lt;/div&gt;
-                &lt;div data-date=&quot;March 2016&quot;&gt;
+                &lt;div data-vtdate=&quot;March 2016&quot;&gt;
                     My Content 2
                 &lt;/div&gt;
-                &lt;div data-date=&quot;April 2016&quot;&gt;
+                &lt;div data-vtdate=&quot;April 2016&quot;&gt;
                     My Content 3
                 &lt;/div&gt;
             &lt;/div&gt;
-            ...
-            &lt;script&gt;
-            $('#myTimeline').timeline({
-                showDate: true // Set to true by default
-            });
-            &lt;/script&gt;
         </code>
     </pre>
     <h2>Modifying Styles</h2>
     <p>
-        The styles can be modified fairly easily in the SASS file. All default colurs are set as variables at the top of the file.
+        All elements use classes so their styles can be easily overwritten. You can add styles for any of the following elements:
     </p>
-    <h2>Contributions</h2>
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Name</th>
+    			<th>Description</th>
+    			<th>Class Used</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<td>Timelime Wrapper</td>
+    			<td>This wraps the entire timeline</td>
+    			<td>.vtimeline</td>
+    		</tr>
+    		<tr>
+    			<td>Timeline Point</td>
+    			<td>This wraps the entirety of each point on the timeline</td>
+    			<td>.vtimeline-point</td>
+    		</tr>
+    		<tr>
+    			<td>Timeline Icon</td>
+    			<td>This is the icon associated with each point</td>
+    			<td>.vtimeline-icon</td>
+    		</tr>
+    		<tr>
+    			<td>Timeline Block</td>
+    			<td>This holds the date and content for each point</td>
+    			<td>.vtimeline-block</td>
+    		</tr>
+    		<tr>
+    			<td>Timeline Date</td>
+    			<td>This holds the date, if provided</td>
+    			<td>.vtimeline-date</td>
+    		</tr>
+    		<tr>
+    			<td>Timeline Content</td>
+    			<td>This holds the actual content of each point</td>
+    			<td>.vtimeline-content</td>
+    		</tr>
+    	</tbody>
+    </table>
+    <h2>Adding Icons</h2>
+    <p>
+        You can optionally add an icon inside of the circle corresponding to each timeline point. To do this, create a div inside of your content and give it the data attribute data-vticon="true". Anything inside this div will get placed inside .vtimeline-icon of the corresponding element. You can use this to easily associate SVG icons, font-awesome icons, etc. with every point or only certain points. An example usage is as follows:
+    </p>
+    <pre>
+        <code class="language-markup">
+            &lt;div id="myTimeline"&gt;
+                &lt;div&gt;
+                    &lt;div data-vticon="true"&gt;
+                        &lt;img src="some/icon/here.png"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    My Content 2
+                &lt;/div&gt;
+                &lt;div&gt;
+                    My Content 3
+                &lt;/div&gt;
+            &lt;/div&gt;''
+        </code>
+    </pre>
+    <h2>Special Mention</h2>
     <h3>CodyHouse.co</h3>
     <p>
         Provided initial idea for the layout of the timeline from a published tutorial.
