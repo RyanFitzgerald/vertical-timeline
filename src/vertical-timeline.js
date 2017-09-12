@@ -109,7 +109,8 @@
 
                 // Add side override if given
                 if (side) {
-                    $(this).parent().addClass(`vt-animate-${side}`);
+					$(this).parent().removeClass('vtimeline-right');
+                    $(this).parent().addClass(`vtimeline-${side}`);
                 }
             });
 

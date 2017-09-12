@@ -42,7 +42,6 @@
 .vtimeline-block {
   width: 45%;
   margin: 0;
-  -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all; }
   .vtimeline-block:after {
     content: '';
@@ -79,7 +78,6 @@
 
 .vtimeline-content {
   background: #eee;
-  -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all; }
 
 .vt-animate-fade {
